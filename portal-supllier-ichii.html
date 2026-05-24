@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Portal Supplier PT. ICHII INDUSTRIES INDONESIA</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:
+      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+      url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      overflow:hidden;
+    }
+
+    .container{
+      width:420px;
+      padding:45px;
+      border-radius:20px;
+      background:rgba(255,255,255,0.12);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,0.2);
+      box-shadow:0 8px 32px rgba(0,0,0,0.35);
+      text-align:center;
+      color:white;
+      animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .logo{
+      font-size:60px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:26px;
+      font-weight:700;
+      margin-bottom:10px;
+      line-height:1.4;
+    }
+
+    .subtitle{
+      font-size:14px;
+      color:#e0e0e0;
+      margin-bottom:30px;
+      line-height:1.6;
+    }
+
+    input{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:12px;
+      outline:none;
+      font-size:16px;
+      text-align:center;
+      background:rgba(255,255,255,0.9);
+      margin-bottom:20px;
+      transition:0.3s;
+    }
+
+    input:focus{
+      transform:scale(1.02);
+      box-shadow:0 0 10px rgba(255,255,255,0.5);
+    }
+
+    button{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:12px;
+      background:linear-gradient(135deg,#00c6ff,#0072ff);
+      color:white;
+      font-size:16px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      letter-spacing:0.5px;
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(0,114,255,0.4);
+    }
+
+    .error{
+      margin-top:18px;
+      color:#ffb3b3;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    .footer{
+      margin-top:30px;
+      font-size:12px;
+      color:#d9d9d9;
+      opacity:0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">🏭</div>
+
+    <h1>
+      Portal Submit File Supplier
+      <br>
+      PT. ICHII INDUSTRIES INDONESIA
+    </h1>
+
+    <div class="subtitle">
+      Silahkan masukkan password supplier untuk mengakses portal tujuan.
+    </div>
+
+    <input 
+      type="password" 
+      id="password" 
+      placeholder="Masukkan Password Supplier"
+    >
+
+    <button onclick="checkPassword()">
+      LOGIN PORTAL
+    </button>
+
+    <div class="error" id="error"></div>
+
+    <div class="footer">
+      © 2026 PT. ICHII INDUSTRIES INDONESIA
+    </div>
+
+  </div>
+
+  <script>
+    function checkPassword() {
+
+      const password = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      if(password === "DAEBAK"){
+        window.location.href = "https://www.google.com";
+      }
+
+      else if(password === "ITO"){
+        window.location.href = "https://www.facebook.com";
+      }
+
+      else if(password === "ISA"){
+        window.location.href = "https://chat.openai.com";
+      }
+
+      else{
+        error.innerHTML = "❌ Password tidak terdaftar!";
+      }
+    }
+
+    // ENTER KEY SUPPORT
+    document
+      .getElementById("password")
+      .addEventListener("keypress", function(event){
+        if(event.key === "Enter"){
+          checkPassword();
+        }
+      });
+  </script>
+
+</body>
+</html>
