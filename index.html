@@ -162,93 +162,42 @@
   </div>
 
   <script>
-    function checkPassword() {
+    async function checkPassword() {
 
-      const password = document.getElementById("password").value;
-      const error = document.getElementById("error");
+  const password =
+    document.getElementById("password").value;
 
-      if(password === "MITSHUYOSHI-1"){
-        window.location.href = "https://drive.google.com/drive/folders/1bA7lgvpyD-M4Q-ENjHErLIL-vn5KL4vt?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto";
-      }
+  const error =
+    document.getElementById("error");
 
-      else if(password === "ISA-1"){
-        window.location.href = "https://drive.google.com/drive/folders/19tYMyfxTJZANslIWHax8Uoy0FFHQaHLq?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto";
-      }
+  error.innerHTML = "";
 
-      else if(password === "MIWA-1"){
-        window.location.href = "https://drive.google.com/drive/folders/1imH9rrx6z77OEoy03cUb4ccKrkFASVuF?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto";
-      }
-        
-      else if(password === "MARUICHII-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1_mHu8fCQ9_a2Yoztd8rXm7iWKbmw8Uaz";
-      }
+  try {
 
-      else if(password === "TOSAMA-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1J4FvHbWDzCpPvS0q6aMiGHgwK5m2XLZf";
-      }
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        password
+      })
+    });
 
-      else if(password === "SAGA-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1CFh3uRbKsQH9707l6CSYD6IN_R6BoPdn";
-      }
+    const data = await response.json();
 
-      else if(password === "SAI-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1SG_SaI5IxIX5O9rbM5_HjrNuRWgxOpgl";
-      }
-
-      else if(password === "AMA-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1KySN50rqqaL5iJavjxaTcCz2_raB-TXv";
-      }
-
-      else if(password === "INDOBOLT-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/17mpPf3ObW1FrVb7iU_STKMiHmeiB3bYS";
-      }
-
-      else if(password === "HITOTSU-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1I12DqAlmdt5DF5CUl3Ca9kUNJn60F8ZQ";
-      }
-
-      else if(password === "MBT-1"){
-        window.location.href = "https://drive.google.com/drive/folders/1cRNBw46_lBYB5oJUfxFlvViUEQ2rJsb0?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto";
-      }
-
-      else if(password === "DAEBAEK-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1WE-dL-nu0U9QNJJ-D6rTDPHNRub4nyWK";
-      }
-
-      else if(password === "MEIDOH-1"){
-        window.location.href = "https://drive.google.com/drive/u/1/folders/1CLAOAfpfCdnteyJZkC4xxoZV2zf0VS9l";
-      }
-
-      else if(password === "TTMI-1"){
-      window.location.href = "https://forms.gle/bYb5r3bVrjFzZEvF9";
-      }
-
-      else if(password === "SCI-1"){
-      window.location.href = "https://forms.gle/W9k9G2EXBZuMRdFKA";
-      }
-
-      else if(password === "MOSI-1"){
-      window.location.href = "https://forms.gle/DDViGyXwYjUogBeg7";
-      }
-
-      else if(password === "JSSI-1"){
-      window.location.href = "https://forms.gle/ZL9UBtjY18kPTZft7";
-      }
-
-      else if(password === "MES-1"){
-      window.location.href = "https://drive.google.com/drive/folders/10aARV0DEa3Gk18Jj6na9QMZbyqndmfgS";
-      }
-
-      else if(password === "GMSI-1"){
-      window.location.href = "https://drive.google.com/drive/folders/1yo6je9hgbDTxaTT9HWpLR2huUC-Gzc8N";
-      }
-
-          
-      else{
-        error.innerHTML = "❌ Password tidak terdaftar!";
-      }
+    if (data.success) {
+      window.location.href = data.redirect;
+    } else {
+      error.innerHTML =
+        "❌ Password tidak terdaftar!";
     }
 
+  } catch (err) {
+    error.innerHTML =
+      "❌ Terjadi kesalahan server";
+  }
+}
     document
       .getElementById("password")
       .addEventListener("keypress", function(event){
