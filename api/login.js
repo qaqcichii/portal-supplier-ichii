@@ -1,7 +1,7 @@
 export default function handler(req, res) {
 
   const suppliers = {
-    [process.env.MITSHUYOSHI_PASSWORD]:
+    [process.env.MITSUYOSHI_PASSWORD]:
       process.env.MITSHUYOSHI_URL,
 
     [process.env.ISA_PASSWORD]:
