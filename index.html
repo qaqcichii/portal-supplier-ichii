@@ -83,13 +83,33 @@
       font-size:16px;
       text-align:center;
       background:rgba(255,255,255,0.9);
-      margin-bottom:20px;
       transition:0.3s;
     }
 
     input:focus{
       transform:scale(1.02);
       box-shadow:0 0 10px rgba(255,255,255,0.5);
+    }
+
+    .password-wrapper{
+      position:relative;
+      margin-bottom:20px;
+    }
+
+    .password-wrapper input{
+      padding-right:50px;
+      margin-bottom:0;
+    }
+
+    .toggle-password{
+      position:absolute;
+      right:15px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor:pointer;
+      font-size:20px;
+      user-select:none;
+      color:#555;
     }
 
     button{
@@ -143,11 +163,14 @@
       Silahkan masukkan password supplier untuk mengakses portal tujuan.
     </div>
 
-    <input 
-      type="password" 
-      id="password" 
-      placeholder="Masukkan Password Supplier"
-    >
+    <div class="password-wrapper">
+      <input
+        type="password"
+        id="password"
+        placeholder="Masukkan Password Supplier"
+      >
+      <span id="togglePassword" class="toggle-password">👁️</span>
+    </div>
 
     <button onclick="checkPassword()">
       LOGIN PORTAL
@@ -162,42 +185,44 @@
   </div>
 
   <script>
+
     async function checkPassword() {
 
-  const password =
-    document.getElementById("password").value;
+      const password =
+        document.getElementById("password").value;
 
-  const error =
-    document.getElementById("error");
+      const error =
+        document.getElementById("error");
 
-  error.innerHTML = "";
+      error.innerHTML = "";
 
-  try {
+      try {
 
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        password
-      })
-    });
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            password
+          })
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (data.success) {
-      window.location.href = data.redirect;
-    } else {
-      error.innerHTML =
-        "❌ Password tidak terdaftar!";
+        if (data.success) {
+          window.location.href = data.redirect;
+        } else {
+          error.innerHTML =
+            "❌ Password tidak terdaftar!";
+        }
+
+      } catch (err) {
+        error.innerHTML =
+          "❌ Terjadi kesalahan server";
+      }
     }
 
-  } catch (err) {
-    error.innerHTML =
-      "❌ Terjadi kesalahan server";
-  }
-}
     document
       .getElementById("password")
       .addEventListener("keypress", function(event){
@@ -205,6 +230,27 @@
           checkPassword();
         }
       });
+
+    const togglePassword =
+      document.getElementById("togglePassword");
+
+    const passwordInput =
+      document.getElementById("password");
+
+    togglePassword.addEventListener("click", function () {
+
+      const type =
+        passwordInput.getAttribute("type") === "password"
+          ? "text"
+          : "password";
+
+      passwordInput.setAttribute("type", type);
+
+      this.textContent =
+        type === "password" ? "👁️" : "🙈";
+
+    });
+
   </script>
 
 </body>
