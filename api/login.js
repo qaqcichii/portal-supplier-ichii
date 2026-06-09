@@ -10,8 +10,8 @@ export default function handler(req, res) {
     [process.env.MIWA_PASSWORD]:
       process.env.MIWA_URL,
 
-    [process.env.MARUICHII_PASSWORD]:
-      process.env.MARUICHII_URL,
+    [process.env.MARUICHI_PASSWORD]:
+      process.env.MARUICHI_URL,
 
     [process.env.TOSAMA_PASSWORD]:
       process.env.TOSAMA_URL,
